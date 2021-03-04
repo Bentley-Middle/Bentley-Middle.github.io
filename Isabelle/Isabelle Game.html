@@ -67,7 +67,7 @@ function create() {
   gameState.plats =  this.physics.add.staticGroup();
   gameState.plats.create(5,390,'rainbow').setScale(0.08).refreshBody().setBodySize(638,50);
  gameState.plats.create(600,200,'rainbow2').setScale(0.08).refreshBody().setBodySize(638,50);
-  gameState.plats.create(1000,550,'rainbow3').setScale(0.08).refreshBody().setBodySize(638,50);
+  gameState.plats.create(1000,670,'rainbow3').setScale(0.08).refreshBody().setBodySize(638,50);
     gameState.plats.create(1500,400,'rainbow4').setScale(0.08).refreshBody().setBodySize(638,50);
    
  gameState.moony = this.physics.add.sprite(40,32, 'moon').setScale(0.03).setGravity(0,350).setCollideWorldBounds(true).setInteractive().setBounce(0.1);
@@ -165,14 +165,15 @@ function update() {
   }
 	
   //bonus to add in quick fall
-  	if(gameState.cursors.down.isDown && !gameState.moony.body.touching.down){
+  if(gameState.cursors.down.isDown && !gameState.moony.body.touching.down){
   gameState.moony.setVelocityY(300);
+ }
   
-  {
     text.setText('' + timedEvent.getProgress().toString().substr(0, 0) + '\nTimer:' + timedEvent.repeatCount);
-}
-    }
+
+    
   }
+
   
   function makeStars(){
     var Star = gameState.stars.get();
