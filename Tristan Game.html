@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <style>*{margin:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+    <script>
+    	const config = {
+  type: Phaser.AUTO,
+  width: 500,
+  height: 2000,
+  backgroundColor: 0x808080,
+  physics: {
+    default: 'arcade',
+    arcade: {
+      debug: true
+    }
+  },
+  scene: {
+    create,
+    preload,
+    update
+  }
+}
+const game = new Phaser.Game(config);
+
+const gameState = {};
+
+function preload() {
+  this.load.spritesheet('bob', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBIq547dYuW3FwQjUplKR4bTKLmwY9HxGJHA&usqp=CAU', {
+    frameWidth: 48.5,
+    frameHeight: 65
+  });
+  this.load.image('background', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNZnGP5KRnUrhHxPIN3gcg7Bl5FeWJv9VPBA&usqp=CAU');
+  this.load.image('Monster', 'https://thumbs.dreamstime.com/b/vector-funny-moster-square-monster-faces-different-emotions-smiles-emoticon-set-messenger-sticker-social-media-animation-142993493.jpg')
+  this.load.image('platform', 'https://i.imgur.com/PDPOwqm.png');
+this.load.image('ground', 'https://i.imgur.com/PDPOwqm.png')
+
+this.load.image('YouWin','https://thumbs.dreamstime.com/b/winner-golden-text-explosion-star-falling-confetti-bright-congratulations-banner-you-win-winners-team-successful-179158320.jpg')
+
+ 
+
+}
+
+function create() {
+  this.add.image(250, 250,'background').setScale(3.5);
+  this.add.image(250, 1900,'background').setScale(3.5);
+  this.add.image(220, 1600,'background').setScale(3.5);
+    this.add.image(220, 1300,'background').setScale(3.5);
+  this.add.image(220, 1000,'background').setScale(3.5);
+  this.add.image(220, 700,'background').setScale(3.5);
+  this.add.image(220, 400,'background').setScale(3.5);
+  this.add.image(220, 100,'background').setScale(3.5);
+  this.add.image(220, 700,'background').setScale(3.5);
+
+  
+  
+  
+  
+  
+  
+ 
+  
+  
+  
+  
+  gameState.plats = this.physics.add.staticGroup();
+  gameState.plats.create(400, 300, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  gameState.plats.create(100, 300, 'platform').setScale(.08).refreshBody().setBodySize(130, 30);
+  
+  gameState.plats.create(400, 1700, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  gameState.plats.create(100, 1700, 'platform').setScale(.08).refreshBody().setBodySize(130, 30);
+  gameState.plats.create(250, 1550, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  gameState.plats.create(100, 1430, 'platform').setScale(.08).refreshBody().setBodySize(130, 30);
+  gameState.plats.create(400, 1300, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  gameState.plats.create(250, 1180, 'platform').setScale(.08).refreshBody().setBodySize(130, 30);
+  gameState.plats.create(400, 1050, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  gameState.plats.create(100, 920, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  gameState.plats.create(400, 1700, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  gameState.plats.create(100, 800, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  gameState.plats.create(300, 680, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  gameState.plats.create(150, 560, 'platform').setScale(.04).refreshBody().setBodySize(60, 20)
+  gameState.plats.create(400, 440, 'platform').setScale(.08).refreshBody().setBodySize(130, 30)
+  
+  
+  
+  
+  
+gameState.ground = this.physics.add.staticGroup();
+  gameState.ground.create(210, 1900, 'ground').setScale(1).refreshBody().setBodySize(600, 250);
+
+ 
+
+
+//gameState.image = this.physics.add.image(250, 250, 'Monster').setInteractive().setScale(.05).refreshBody().setBodySize(800, 800).setGravity(0, 110).setCollideWorldBounds(true).setBounce(1);
+
+ 
+
+
+  gameState.player = this.physics.add.sprite(220, 1700, 'bob').setScale(.7).setGravity(0, 300).setCollideWorldBounds(true).setInteractive();
+  this.cameras.main.startFollow(gameState.player)
+  
+  this.physics.add.collider(gameState.player, gameState.plats);
+  this.physics.add.collider(gameState.player, gameState.ground);
+
+this.add.image(250,150,'YouWin').setScale(.2)
+
+
+  this.anims.create({
+    key: 'left',
+    frames: this.anims.generateFrameNumbers('bob', {
+      start: 6,
+      end: 8
+    }),
+    frameRate: 5,
+  });
+
+
+  this.anims.create({
+    key: 'right',
+    frames: this.anims.generateFrameNumbers('bob', {
+      start: 3,
+      end: 5
+    }),
+    frameRate: 5,
+  });
+  //this.anims.create({
+  // key: 'up',
+  //frames: this.anims.generateFrameNumbers('bob', {
+  // start: 9,
+  //end: 13
+  //}),
+  // frameRate: 5,
+  // });
+  //this.anims.create({
+  //key: 'down',
+  // frames: this.anims.generateFrameNumbers('bob', {
+  // start: 0,
+  // end: 2
+  // }),
+  // frameRate: 5,
+  // });
+
+
+  gameState.cursors = this.input.keyboard.createCursorKeys();
+
+ 
+
+ 
+
+ 
+
+}
+
+
+function update() {
+ 
+ 
+ 
+ if (gameState.cursors.right.isDown) {
+
+    gameState.player.setVelocityX(120);
+    gameState.player.anims.play('right', true);
+
+  } else if (gameState.cursors.left.isDown) {
+
+    gameState.player.setVelocityX(-120);
+    gameState.player.anims.play('left', true);
+
+  } else {
+
+    gameState.player.setVelocityX(0);
+    if (gameState.cursors.up.isDown && gameState.player.body.touching.down) {
+      gameState.player.setVelocityY(-300);
+
+    }
+
+
+  }
+}
+</script>
+  </head>
+  <body>
+  </body>
+</html>
+

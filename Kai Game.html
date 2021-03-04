@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <style>*{margin:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+    <script>
+    	const config = {
+    type: Phaser.AUTO,
+    width: 500,
+    height: 250,
+  backgroundColor: 0x6495ED,
+  physics: {
+  default: 'arcade',
+  arcade: { debug: true }
+},
+    scene: {
+    create,
+    preload,
+    update
+    }
+}
+const game = new Phaser.Game(config);
+
+function preload() {
+   this.load.audio('music', 'https://labs.phaser.io/assets/audio/Andrea_Milana_-_Harlequin_-_The_Clockworks_-_Electribe_MX_REMIX.m4a')
+
+
+  this.load.spritesheet('Helicopter', 'https://i.imgur.com/JexfCrQ.png?1',{ frameWidth: 407, frameHeight: 150});
+  this.load.image('Back', 'https://i.imgur.com/I4NXkkK.png');
+    
+}
+
+
+const gameState = {
+      onColor: 0x001001,
+     offColor: 0x000101
+}
+
+
+function create() {
+                gameState.backgroundMusic = this.sound.add('music');
+    gameState.backgroundMusic.play();
+
+  gameState.background = this.add.tileSprite(250,150, 500, 300, 'Back');
+ gameState.background.tileScaleX = 3;
+
+
+  
+  
+     gameState.player = this.physics.add.sprite(200,100,'Helicopter').setCollideWorldBounds(true).setInteractive().setBodySize(400,120).setGravityY(+8000).setScale(0.50);
+    
+
+     
+  this.anims.create({
+     key: 'left',
+     frames: this.anims.generateFrameNumbers('Helicopter', { start: 0, end: 3 }),
+     frameRate: 10,
+    });
+  
+  
+     this.anims.create({
+     key: 'right',
+     frames: this.anims.generateFrameNumbers('Helicopter', { start: 0, end: 3 }),
+     frameRate: 10,
+    });
+
+
+  this.anims.create({
+     key:'turn',
+  frames: [{key: 'Helicopter', frame: 0}],
+  frameRate: 10
+ });
+  this.anims.create({
+     key:'up',
+  frames: this.anims.generateFrameNumbers('Helicopter', { start: 0, end: 4 }),
+  frameRate: 10,
+ });
+ this.anims.create({
+     key:'down',
+  frames: this.anims.generateFrameNumbers('Helicopter', { start: 0, end: 4 }),
+  frameRate: 8
+ });
+ this.anims.create({
+     key:'test',
+  frames: this.anims.generateFrameNumbers('Helicopter', { start: 12, end: 16 }),
+  frameRate: 10
+ });
+ 
+ gameState.cursors = this.input.keyboard.createCursorKeys();
+     
+  
+gameState.cursors.SPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+}
+
+
+function update(){
+      gameState.player.setVelocity(0);
+ gameState.background.tilePositionX += 1.5;
+  if(gameState.cursors.right.isDown){
+      gameState.player.setVelocityX(100);
+    gameState.player.flipX = false;
+    gameState.player.anims.play('right',true);
+  }  
+  else if(gameState.cursors.left.isDown){
+      gameState.player.setVelocityX(-70);
+    gameState.player.flipX = true;
+    gameState.player.anims.play('right', true);
+  
+  } 
+  if(gameState.cursors.up.isDown){
+      gameState.player.setVelocityY(-500);
+    gameState.player.anims.play('up', true);
+  } else if(gameState.cursors.down.isDown){
+      gameState.player.setVelocityY(70);
+    gameState.player.anims.play('down', true);
+  } 
+   
+ if(gameState.cursors.SPACE.isDown){
+         gameState.player.setVelocity(10);
+    gameState.player.anims.play('test', true);
+ }
+}
+</script>
+  </head>
+  <body>
+  </body>
+</html>
+

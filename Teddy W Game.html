@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <style>*{margin:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+    <script>
+    	const config = {
+  type: Phaser.AUTO,
+  width: 3000,
+  height: 1000,
+  backgroundColor: 0x1387c4,
+  physics: {
+    default: 'arcade',
+    arcade: {
+      debug: true
+    }
+  },
+  scene: {
+    create,
+    preload,
+    update
+  }
+}
+
+
+const gamestate = {
+  onColor: 0xf5d45e,
+  offColor: 0x00ff7f
+}
+
+function preload() {
+  this.load.image('background', 'https://i.imgur.com/XKG9tn0.jpg');
+
+ this.load.image('John', 'https://i.imgur.com/OyleYyu.png');
+
+  this.load.image('Jill', 'https://i.imgur.com/nnrF8t8.png');
+
+  this.load.image('FighterBoys', 'https://i.imgur.com/nnrF8t8.png');
+
+  this.load.image('Ground', 'https://i.imgur.com/dwMzy5s.png');
+
+  this.load.image('BB', 'https://i.imgur.com/ZdV812s.png')
+
+  this.load.spritesheet('Char1', 'https://i.imgur.com/BgvAugf.png',{frameWidth: 80, frameHeight: 80});
+
+  this.load.image('Plat1', 'https://i.imgur.com/HFRbziN.png');
+
+  this.load.image('Plat2', 'https://i.imgur.com/HFRbziN.png');
+  
+  this.load.image("Plat3", 'https://i.imgur.com/oJNuFhi.png')
+  
+  this.load.audio('La Musica', 'https://labs.phaser.io/assets/audio/Andrea_Milana_-_Harlequin_-_The_Clockworks_-_Electribe_MX_REMIX.m4a')
+
+
+}
+
+
+function create() { 
+
+  gamestate.background = this.add.tileSprite(900, 400, 10000, 9000, 'background').setInteractive().setScale(1, 1);
+  
+  gamestate.background.tileScaleX = 1;
+  
+ gamestate.backgroundMusic = this.sound.add('La Musica');
+    gamestate.backgroundMusic.play();
+ 
+
+  gamestate.Ground = this.physics.add.staticGroup();
+  gamestate.Ground.create(1000,  850, 'Ground').setScale(200, 0.8).refreshBody().setBodySize(100000, 250).setInteractive();
+
+gamestate.Plat1 = this.physics.add.staticGroup();
+gamestate.Plat1.create(650, 500, 'Plat1').setScale(0.1).refreshBody().setBodySize(215, 77).setInteractive();
+
+  gamestate.Plat2 = this.physics.add.staticGroup();
+  gamestate.Plat2.create(200, 500, 'Plat2').setScale(0.1).refreshBody().setBodySize(230, 60).setInteractive();
+  
+  gamestate.Plat3 = this.physics.add.staticGroup();
+  gamestate.Plat3.create(1100, 500, 'Plat2').setScale(0.1).refreshBody().setBodySize(230, 60).setInteractive();
+  
+  gamestate.Plat4 = this.physics.add.staticGroup();
+  gamestate.Plat4.create(1550, 500, 'Plat2').setScale(0.1).refreshBody().setBodySize(230, 60).setInteractive();
+  
+  gamestate.Plat5 = this.physics.add.staticGroup();
+  gamestate.Plat5.create(2000, 500, 'Plat2').setScale(0.1).refreshBody().setBodySize(230, 60).setInteractive();
+  
+  gamestate.Plat6 = this.physics.add.staticGroup();
+  gamestate.Plat6.create(2400, 500, 'Plat3').setScale().refreshBody().setBodySize(230, 60).setInteractive();
+  
+ 
+  //gamestate.John = this.add.sprite(185, 600, 'John').setScale(0.3);
+  
+  gamestate.Char1 = this.physics.add.sprite( 100, 400, 'Char1').setCollideWorldBounds(true).setInteractive().setGravity(0,425).setBounce(0);
+  
+  
+  
+  this.anims.create({
+     key: 'right',
+     frames: this.anims.generateFrameNumbers('Char1', { start: 1, end: 8 }),
+     frameRate: 13,
+    });
+    
+  this.anims.create({
+     key: 'left',
+     frames: this.anims.generateFrameNumbers('Char1', { start: 1, end: 8 }),
+     frameRate: 10,
+    });
+    
+  this.anims.create({
+     key: 'turn',
+     frames: this.anims.generateFrameNumbers('Char1', { start: 1, end: 8 }),
+     frameRate: 10,
+    });
+    
+  this.anims.create({
+     key: 'up',
+     frames: this.anims.generateFrameNumbers('Char1', { start: 1, end: 8 }),
+     frameRate: 10,
+    });
+    
+  this.anims.create({
+     key: 'down',
+     frames: this.anims.generateFrameNumbers('Char1', { start: 1, end: 8 }),
+     frameRate: 10,
+    });
+    
+    gamestate.BBGroup = this.physics.add.group({
+    key: 'BB',
+    quantity: 100,
+    maxSize: 100,
+    active: false,
+    visible: false,
+    enable: false,
+    setCollideWorldBounds: true,
+    bounceX: 0.5,
+    bounceY: 3,
+    gravityY: 50,
+    
+
+  })
+
+ // this.physics.add.collider(gamestate.John, gamestate.Ground);
+ // this.physics.add.collider(gamestate.John, gamestate.Plat1);
+ // this.physics.add.collider(gamestate.John, gamestate.Plat2);
+  
+  this.physics.add.collider(gamestate.Char1, gamestate.Plat1);
+  this.physics.add.collider(gamestate.Char1, gamestate.Plat2);
+  this.physics.add.collider(gamestate.Char1, gamestate.Ground); 
+  this.physics.add.collider(gamestate.Char1, gamestate.Plat3);
+  
+  this.physics.add.collider(gamestate.Char1, gamestate.BBGroup)
+  
+  this.physics.add.collider(gamestate.BBGroup, gamestate.BBGroup); 
+  
+  //this.physics.add.collider(gamestate.Char1, gamestate.John);
+  this.physics.add.collider(gamestate.Char1, gamestate.BBGroup)
+ // this.physics.add.collider(gamestate.John, gamestate.BBGroup)
+  
+  this.physics.add.collider(gamestate.BBGroup, gamestate.Plat1)
+  this.physics.add.collider(gamestate.BBGroup, gamestate.Plat2)
+  this.physics.add.collider(gamestate.BBGroup, gamestate.Ground)
+ 
+  
+  gamestate.cursors = this.input.keyboard.createCursorKeys();
+  
+ gamestate.background.on('pointerdown', function() {
+   makeBB(game.input.mousePointer.x, game.input.mousePointer.y, 10, -100);
+  });
+
+  gamestate.cursors = this.input.keyboard.createCursorKeys();
+  
+
+
+this.physics.add.overlap(gamestate.Char1, gamestate.BB, collectBB);
+
+this.cameras.main.setBounds(5, 5, 10000, 1000);
+this.cameras.main.setZoom(1.2);
+
+
+}
+
+function makeBB(x, y, xVel, yVel) {
+
+  var Bacon = gamestate.BBGroup.get();
+  if (!Bacon) {return}
+  Bacon.enableBody(true, x, y, true, true).setVelocity(xVel, yVel).setScale(0.1);
+
+ 
+
+}
+
+function collectBB(Char1, BB){
+  BB.disableBody(true, true);
+}
+
+function update() {
+
+gamestate.background.tilePositionX += 3;
+  
+  if(gamestate.cursors.right.isDown){
+      gamestate.Char1.setVelocityX(150);
+    gamestate.Char1.flipX = false;
+    gamestate.Char1.anims.play('right', true);
+  } else if(gamestate.cursors.left.isDown){
+      gamestate.Char1.setVelocityX(-150);
+    gamestate.Char1.anims.play('left' , true)
+    gamestate.Char1.flipX = true;
+  } else{
+      gamestate.Char1.setVelocityX(0);
+    gamestate.Char1.anims.pause();
+  }
+  if(gamestate.cursors.up.isDown && gamestate.Char1.body.touching.down){
+      gamestate.Char1.setVelocityY(-300);
+  }
+  if(gamestate.cursors.down.isDown && !gamestate.Char1.body.touching.down){
+  gamestate.Char1.setVelocityY(300);
+}
+
+  this.cameras.main.centerOn(gamestate.Char1.x, gamestate.Char1.y);
+
+  
+
+ 
+
+ 
+
+ }
+ 
+
+
+const game = new Phaser.Game(config)
+</script>
+  </head>
+  <body>
+  </body>
+</html>
+

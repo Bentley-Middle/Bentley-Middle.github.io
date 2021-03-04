@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <style>*{margin:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+    <script>
+    	const config = {
+  type: Phaser.AUTO,
+  width: 6000,
+  height: 6000,
+  backgroundColor: 0x333333,
+  scene: {
+    create,
+    update,
+    preload
+  }
+}
+
+const game = new Phaser.Game(config);
+
+const gameState = {	//uses gamestate to store all variables
+  onColor: 0x03fcfc,
+  offColor: 0x9caaaa
+  
+}
+
+function preload(){
+
+}
+
+function create() {
+	
+  gameState.rect1 = this.add.rectangle(200, 200, 100, 300, gameState.onColor);
+  gameState.rect2 = this.add.rectangle(200, 300, 100, 100, gameState.offColor);
+  
+  // set objects as interactive here
+  gameState.rect2.setInteractive();
+  gameState.rect1.setInteractive();
+  
+  // pointerup: unclick, pointerover: mouse on;
+  gameState.rect2.on('pointerup', function(){
+    gameState.rect1.fillColor = gameState.offColor;
+    gameState.rect2.fillColor = gameState.onColor
+  } ); 
+  gameState.rect1.on('pointerover', function(){
+    gameState.rect2.fillColor = gameState.offColor;
+    gameState.rect1.fillColor = gameState.onColor
+  } );
+  
+  gameState.circ1 = this.add.circle(400, 400, 40, gameState.onColor);
+  gameState.circ2 = this.add.circle(400, 500, 40, gameState.offColor);
+  
+  //creates keyboard listeners 
+  this.input.keyboard.on('keydown-D', function() {
+    if(gameState.circ1.fillColor == gameState.onColor ){
+  	gameState.circ1.fillColor = gameState.offColor;
+  } else {
+  	gameState.circ1.fillColor = gameState.onColor;
+  }
+  });
+  
+  //creates keyboard listeners with different function for key-up/down
+ 	
+  
+  
+  //create cursor for moving sprite
+  
+  
+  gameState.cursors = this.input.keyboard.createCursorKeys();
+ 
+}
+
+function update() {
+	
+  //add in listeners for cursors with actions added
+   
+}
+</script>
+  </head>
+  <body>
+  </body>
+</html>
+

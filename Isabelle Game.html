@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <style>*{margin:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+    <script>
+    	const config = {
+type: Phaser.CANVAS,
+width: 1500,
+height: 900,
+  backgroundColor: 0x000000,
+physics: {
+  default: 'arcade',
+  arcade: { debug: false}
+},
+
+
+
+
+
+
+scene: {
+    create,
+    preload,
+    update
+
+
+}
+}
+const game = new Phaser.Game(config)
+const gameState = {
+onColor: 0x30D5C8,
+offColor: 0xdbfffb
+}
+
+
+
+function preload() {
+this.load.image ('background' , 'https://i.imgur.com/ba3I0Y4.jpg')
+this.load.image ( 'moon' , 'https://i.imgur.com/iljgl0b.jpg')
+this.load.image ('rainbow' , 'https://i.imgur.com/61lWako.jpg')
+this.load.image ('rainbow2' , 'https://i.imgur.com/61lWako.jpg')
+this.load.image ('rainbow3' , 'https://i.imgur.com/61lWako.jpg')
+this.load.image ('rainbow4' , 'https://i.imgur.com/61lWako.jpg')
+this.load.image ('stary' , 'https://i.imgur.com/JLVGw0Q.png')
+ this.load.audio('match5','https://labs.phaser.io/assets/audio/kyobi/wavs/match5.wav');
+ 
+ this.load.audio('tune','https://labs.phaser.io/assets/audio/Dafunk%20-%20Hardcore%20Power%20(We%20Believe%20In%20Goa%20-%20Remix).m4a')
+}
+
+
+let moon;
+let rainbow;
+let rainbow2;
+let timedEvent;
+
+
+
+
+function create() {
+
+      gameState.backdrop = this.add.image(250,300,'background').setInteractive();    
+      gameState.backdrop.setScale(4);
+  gameState.plats =  this.physics.add.staticGroup();
+  gameState.plats.create(5,390,'rainbow').setScale(0.08).refreshBody().setBodySize(638,50);
+ gameState.plats.create(600,200,'rainbow2').setScale(0.08).refreshBody().setBodySize(638,50);
+  gameState.plats.create(1000,550,'rainbow3').setScale(0.08).refreshBody().setBodySize(638,50);
+    gameState.plats.create(1500,400,'rainbow4').setScale(0.08).refreshBody().setBodySize(638,50);
+   
+ gameState.moony = this.physics.add.sprite(40,32, 'moon').setScale(0.03).setGravity(0,350).setCollideWorldBounds(true).setInteractive().setBounce(0.1);
+
+gameState.stary = this.physics.add.sprite(600,200, 'stary').setScale(0.001).setGravity(0,350).setCollideWorldBounds(true).setInteractive().setBounce(0.1);
+  
+  gameState.cursors = this.input.keyboard.createCursorKeys();
+
+ this.physics.add.collider(gameState.moony, gameState.plats);
+ 
+ gameState.stars = this.physics.add.group({
+ 		             key: 'stary',
+    quantity: 20,
+    maxSize: 20,
+    active: false,
+    visible: false,
+    enable: false,
+    collideWorldBounds: true,
+    bounceX: 0.75,
+    bounceY: 1,
+    gravityY: 50,
+    setScale: {x: 0.03}
+    
+    
+ })
+ 
+ gameState.backdrop.on('pointerdown',function(){
+ 	makeStars(game.input.mousePointer.x, game.input.mousePointer.y, 10,-100);
+ }); 
+ 
+ for(i=0; i < 20; i++){
+  makeStars();
+  }
+ 
+ 
+
+
+ this.physics.add.collider(gameState.stars, gameState.plats);
+ this.physics.add.collider(gameState.stars, gameState.ground);
+ this.physics.add.collider(gameState.stars);
+ 
+ this.physics.add.overlap(gameState.moony, gameState.stars, collectStar);
+ 
+ gameState.backgroundMusic = this.sound.add('tune');
+   gameState.backgroundMusic.play();
+    
+    
+    gameState.match5 = this.sound.add('match5');
+    
+	gameState.cursors = this.input.keyboard.createCursorKeys();   
+  
+   gameState.cursors.A = this.input.keyboard.addKey('A');
+  
+  
+    
+  this.input.keyboard.on('collectStar', function () {
+        gameState.match5.play();
+        
+    });
+
+{
+ text = this.add.text(32, 32);
+
+    timedEvent = this.time.addEvent({ delay: 2000, callbackScope: this, repeat: 100 });
+}
+
+  
+ 
+ 
+ 
+ }
+
+function update() {
+
+  if(gameState.cursors.left.isDown){
+    gameState.moony.x -= 6;
+  	gameState.moony.rotation -= 0.2
+  }
+  
+  if(gameState.cursors.right.isDown){
+  	gameState.moony.x += 6;
+    	gameState.moony.rotation += 0.2
+  
+    
+  }
+   if(gameState.cursors.up.isDown){
+  	gameState.moony.y -= 6;
+  }
+  if(gameState.cursors.down.isDown){
+  	gameState.moony.y += 6;
+  }
+  
+    if(gameState.cursors.up.isDown && gameState.moony.body.touching.down){
+  	gameState.moony.setVelocityY(-300);
+  }
+	
+  //bonus to add in quick fall
+  	if(gameState.cursors.down.isDown && !gameState.moony.body.touching.down){
+  gameState.moony.setVelocityY(300);
+  
+  {
+    text.setText('' + timedEvent.getProgress().toString().substr(0, 0) + '\nTimer:' + timedEvent.repeatCount);
+}
+    }
+  }
+  
+  function makeStars(){
+    var Star = gameState.stars.get();
+    if(!Star){return}
+    Star.enableBody(true, Phaser.Math.Between(0, 1500), Phaser.Math.Between(0, 900), true, true).setVelocity(60, 50);
+  }
+  function collectStar(player, star){star.disableBody(true, true);}
+  
+</script>
+  </head>
+  <body>
+  </body>
+</html>
+

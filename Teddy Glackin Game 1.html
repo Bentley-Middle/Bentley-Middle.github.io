@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <style>*{margin:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+    <script>
+    	const config = {
+      type: Phaser.AUTO,
+      width: 500,
+      height: 500,
+      backgroundColor: 0x00FFCC,
+      physics: {
+           default: 'arcade',
+           arcade: { debug: true }
+           },
+      scene: {
+           create,
+           preload,
+           update
+      }
+   }
+const game = new Phaser.Game(config);
+
+const gameState = {};
+
+function preload(){
+this.load.image('Background', 'https://cdna.artstation.com/p/assets/images/images/007/382/318/large/nastya-friday-game-background-2.jpg?1505758831')
+this.load.spritesheet('sprite1', 'https://blaiprat.github.io/jquery.animateSprite/img/scottpilgrim_multiple.png',{ frameWidth:108 , frameHeight:140})
+this.load.image('plat1', 'https://images-na.ssl-images-amazon.com/images/I/717-2OHMm4L._AC_SX679_.jpg');
+this.load.image('ground', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6j72OFjaswXCeV7F6IkSttE1DHKuSUGcgDQ&usqp=CAU');
+this.load.image('goal','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpn0oLxGvCclI4GdUItp2Zwn9draalhAbheQ&usqp=CAU')
+}
+//function makeEnemy(x, y, xVel, yVel){
+//var Enemy = gameState.enemyGroup.get();   //gets first inactive member
+//if(!Enemy){return} //prevents an error if we've reached our max number
+//Enemy.enableBody(true, x, y, true, true).setVelocity(xVel, yVel).setScale(0.2);  //activates the member
+//}
+  
+
+function create(){
+gameState.Background = this.add.image(250,250,'Background').setInteractive().setScale(0.5)
+ 
+ gameState.plats = this.physics.add.staticGroup();
+ gameState.plats.create(400,360,'plat1').setScale(0.15).refreshBody()
+gameState.plats.create(300,250,'plat1').setScale(0.15).refreshBody()
+gameState.plats.create(100,120,'plat1').setScale(0.15).refreshBody()
+
+gameState.goal = this.physics.add.staticGroup();
+gameState.goal.create(50,50,'goal').setScale(0.3).refreshBody()
+
+gameState.cursors = this.input.keyboard.createCursorKeys();
+
+//gameState.Background.on('pointerdown',function(){
+   // makeEnemy(game.input.mousePointer.x, game.input.mousePointer.y, 10,-100);
+//});
+
+gameState.ground = this.physics.add.staticGroup();
+gameState.ground.create(200,570,'ground').setScale(1.5).refreshBody();
+
+
+gameState.player = this.physics.add.sprite( 200, 400, 'sprite1').setInteractive().setScale(0.50).setCollideWorldBounds(true).setGravity(0,340)
+this.physics.add.collider(gameState.player, gameState.ground);
+this.physics.add.collider(gameState.player, gameState.plats);
+this.physics.add.collider(gameState.player, gameState.goal, disableIt)
+//gameState.enemyGroup = this.physics.add.group({
+    //key: 'enemy1',  //use keyword you used for the picture you'd like for each group member
+    //quantity: 20, //this makes copies of that picture.
+    //maxSize: 20, //this is the max size the group can be
+    //active: false, //makes group non-interactive when first made
+    //visible: false, //makes the group invisible when it's first made
+    //enable: false, //disables objects from scene when first created
+    //collideWorldBounds: true, //keeps objects in frame
+    //bounceX: 0.5, //sets a horizontal bounce
+    //bounceY: 1, //sets vertical bounce
+    //gravityY: 50 // sets vertical gravity
+
+
+ //})
+this.anims.create({
+     key: 'right',
+     frames: this.anims.generateFrameNumbers('sprite1', { start: 1, end: 7 }),
+     frameRate: 12,
+    });
+    
+    
+    this.anims.create({
+     key: 'left',
+     frames: this.anims.generateFrameNumbers('sprite1', { start: 16 , 
+     end:8 }),
+     frameRate: 12,
+    });
+
+//this.physics.add.collider(gameState.enemyGroup, gameState.plats);
+//this.physics.add.collider(gameState.enemyGroup);
+//this.physics.add.collider(gameState.enemyGroup, gameState.ground);
+}
+
+
+function update(){
+ 
+
+      if(gameState.cursors.left.isDown){
+      gameState.player.setVelocityX(-150);
+      gameState.player.anims.play('left', true);
+  }
+if(gameState.cursors.right.isDown){
+      gameState.player.setVelocityX(150);
+      gameState.player.anims.play('right', true);
+}
+ if(gameState.cursors.up.isDown && gameState.player.body.touching.down){
+
+      gameState.player.setVelocityY(-300);
+
+  }  
+
+}
+
+
+function disableIt(body1,body2){body1.disableBody(true,true)}
+</script>
+  </head>
+  <body>
+  </body>
+</html>
+

@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <style>*{margin:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+    <script>
+    	const config = {
+     type: Phaser.AUTO,
+     width: 620,
+     height: 490, 
+     physics: {
+    	 default:'arcade',
+    	 arcade: {debug: false}
+    	},
+     scene: {
+         create,
+         update,
+         preload,  
+     }
+}
+const gameState = { 
+     onColor: 0x001001,
+     offColor: 0x000101
+  }
+const game = new Phaser.Game(config)
+
+var person
+var intro
+var intro2
+var zoom
+var death
+var death2
+var death3
+var dead = 0
+var sc
+var po = 0
+var back
+var go
+var moveAngle
+var spawn
+function preload(){
+this.load.spritesheet('spirit', 'https://i.imgur.com/XnFBqGC.png', {frameWidth:205, frameHeight:227});
+this.load.spritesheet('homing','https://i.imgur.com/t0S0zTm.png',{frameWidth:80, frameHeight:55})
+this.load.spritesheet('bouncer', 'https://i.imgur.com/R5w8Xcd.png',{frameWidth:77, frameHeight:53})
+this.load.image('plat', 'https://art.pixilart.com/26682ad295ad141.png');
+
+}
+
+function create() { 
+
+
+score = this.time.addEvent({ delay: 1000, callback: points, callbackScope: this, loop: true });
+spawn = this.time.addEvent({ delay: 5000, callback: onEvent, callbackScope: this, loop: true });
+
+back = this.add.image(300, 200, 'plat')
+gameState.bouncer = this.physics.add.sprite(350,350,'bouncer').setCollideWorldBounds(true, 1, 1).setBounce(1.001).setInteractive().setBodySize(40,40)
+gameState.bouncy = this.physics.add.sprite(200,350,'bouncer').setCollideWorldBounds(true, 1, 1).setBounce(1.001).setInteractive().setBodySize(40,40)
+gameState.bouncer.setVelocityX(100)
+gameState.bouncer.setVelocityY(30)
+gameState.bouncy.setVelocityX(-30)
+gameState.bouncy.setVelocityY(-50)
+gameState.homings = this.physics.add.group({
+    key: 'bouncer',  //use keyword you used for the picture you'd like for each group member
+    quantity: 50, //this makes copies of that picture.
+    maxSize: 50, //this is the max size the group can be
+    active: false, //makes group non-interactive when first made
+    visible: false, //makes the group invisible when it's first made
+    enable: false, //disables objects from scene when first created
+    collideWorldBounds: true, //keeps objects in frame
+    bounceX: 1, //sets a horizontal bounce
+    bounceY: 1, //sets vertical bounce
+ 
+ })
+
+gameState.person = this.physics.add.sprite(100,270,'spirit').setCollideWorldBounds(true, 1, 1).setBounce(0.8).setInteractive().setScale(0.2,0.2);
+ 
+ 
+ this.anims.create({
+     key: 'homer',
+     frames: this.anims.generateFrameNumbers('homing', { start: 0, end: 11 }),
+     frameRate: 7,
+    });
+     this.anims.create({
+     key: 'boing',
+     frames: this.anims.generateFrameNumbers('bouncer', { start: 0, end: 13 }),
+     frameRate: 5,
+     repeat: -1
+    });
+ this.anims.create({
+     key: 'right',
+     frames: this.anims.generateFrameNumbers('spirit', { start: 9, end: 11 }),
+     frameRate: 7,
+    });
+     this.anims.create({
+     key: 'up',
+     frames: this.anims.generateFrameNumbers('spirit', { start: 0, end: 2 }),
+     frameRate: 7,
+    });
+      this.anims.create({
+     key: 'down',
+     frames: this.anims.generateFrameNumbers('spirit', { start: 3, end: 5 }),
+     frameRate: 7,
+    });
+   // gameState.homings.playAnimation('boing')
+    gameState.cursors = this.input.keyboard.createCursorKeys();
+ this.physics.add.collider(gameState.bouncer)
+ 
+ this.physics.add.collider(gameState.bouncer,gameState.homings)
+ 
+ this.physics.add.collider(gameState.homings)
+ 
+ this.physics.add.collider(gameState.bouncy)
+ 
+ death = this.physics.add.collider(gameState.person,gameState.bouncer, function(){
+  gameState.person.disableBody(true,true)
+ go.setText('Game Over')
+ dead = 1
+  })
+  death = this.physics.add.collider(gameState.person,gameState.bouncy, function(){
+ gameState.person.disableBody(true,true)
+ go.setText('Game Over')
+  dead = 1
+  })
+death = this.physics.add.collider(gameState.person,gameState.homings, function(){
+  gameState.person.disableBody(true,true)
+ go.setText('Game Over')
+   dead = 1
+  })
+ 
+intro = this.add.text(5, 50, ' ').setSize(200,100);
+intro2 = this.add.text(5, 80, ' ').setSize(200,100);
+intro.setText('avoid enemies for as long as possible. arrow keys to move');
+intro2.setText('space to dash in the direction you are going')
+go= this.add.text(245, 310, ' ').setSize(200,100);
+sc = this.add.text(0, 0, 'score: '+ po);
+}
+
+
+function update(){
+
+if(gameState.cursors.right.isDown && Phaser.Input.Keyboard.JustDown(gameState.cursors.space)){
+	gameState.person.x += 50;
+}
+if(gameState.cursors.left.isDown && Phaser.Input.Keyboard.JustDown(gameState.cursors.space)){
+	gameState.person.x -= 50;
+}
+if(gameState.cursors.up.isDown && Phaser.Input.Keyboard.JustDown(gameState.cursors.space)){
+	gameState.person.y -= 50;
+}
+if(gameState.cursors.down.isDown && Phaser.Input.Keyboard.JustDown(gameState.cursors.space)){
+	gameState.person.y += 50;
+}
+if(gameState.cursors.left.isDown){
+  	gameState.person.setVelocityX(-200);
+    gameState.person.anims.play('right', true);
+    gameState.person.flipX=true
+  }
+  else if(gameState.cursors.right.isDown){
+  	gameState.person.setVelocityX(200);
+  gameState.person.anims.play('right', true);
+gameState.person.flipX=false
+  }
+  else if(gameState.cursors.up.isDown){
+  	gameState.person.setVelocityY(-200);
+ gameState.person.anims.play('up', true);
+  }
+ else if(gameState.cursors.down.isDown){
+  	gameState.person.setVelocityY(200);
+gameState.person.anims.play('down', true);
+//L.setVelocityX(Math.floor(Math.random()*-110))
+//L.setVelocityY(Math.floor(Math.random()*-110))
+}
+else{
+	gameState.person.setVelocityY(0);
+    gameState.person.setVelocityX(0);
+}
+gameState.bouncer.anims.play('boing',true)
+gameState.bouncy.anims.play('boing',true)
+}
+function points (){
+if (dead === 0){
+po = po + 1
+sc.setText('score: '+ po);
+}
+}
+function onEvent ()
+{
+   makeEnemy(Phaser.Math.Between(0,620), Phaser.Math.Between(0,340),Phaser.Math.Between(50,100),Phaser.Math.Between(50,100)); 
+}
+function makeEnemy(x,y,xVel,yVel){
+zoom = gameState.homings.get();   //gets first inactive member
+if(!zoom){return} //prevents an error if we've reached our max number
+zoom.enableBody(true, x, y, true, true).setVelocity(xVel, yVel).setInteractive().setBodySize(40,40);
+zoom.anims.play('boing',true);
+intro.setText(' ')
+intro2.setText(' ')
+}
+
+</script>
+  </head>
+  <body>
+  </body>
+</html>
+

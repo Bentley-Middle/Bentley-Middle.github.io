@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <style>*{margin:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+    <script>
+    	const config = {
+type: Phaser.AUTO,
+width: 800,
+height: 800,
+  backgroundColor: 0x000000,
+  physics: {
+  default: 'arcade',
+  arcade: { debug: false}
+},
+scene: {
+    create,
+    preload,
+    update
+}
+}
+
+
+const game = new Phaser.Game(config);
+
+const gameState = {};
+
+function preload() {
+
+ this.load.image('sans', 'https://i.imgur.com/Y3KCjYA.png');
+ 
+  this.load.image('judgement hall', "https://i.imgur.com/X8Y2fwx.jpg");
+ 
+ this.load.image('frisk','https://i.imgur.com/tqsG72K.png')
+ 
+ this.load.image('box','https://i.imgur.com/26iSXbo.png?2')
+ 
+ this.load.image ('text box','https://i.imgur.com/e2NxvVS.png?1')
+ 
+ this.load.image('Gaster Blaster','https://i.imgur.com/UcMzGlc.png')
+  
+ this.load.image('Bone Spear','https://i.imgur.com/U3lTYTJ.png')
+ 
+ this.load.image('fight','https://i.imgur.com/3uZHlXS.png')
+ 
+ this.load.image('act','https://i.imgur.com/UqkROqq.png')
+ 
+ this.load.image('item','https://i.imgur.com/iDvsW24.png?1')
+  
+ this.load.image('mercy','https://i.imgur.com/Yqu7Pn1.png?1')
+ 
+ this.load.image ('sentence','https://i.imgur.com/PR9JcgR.png?1')
+ 
+ this.load.audio('Megalovania','https://archive.org/details/TobyFoxMegalovania')
+ 
+}
+
+
+
+var megalovania;
+
+function create() {
+
+let sans = this.add.image( 350, 170, 'sans')
+sans.setScale(0.2)
+
+//var music = this.sound.add('Megalovania');
+
+//music.play();
+
+let frisk = gameState.player = this.physics.add.sprite( 320, 400, 'frisk').setCollideWorldBounds(true).setInteractive().setScale(0.02);
+
+gameState.cursors = this.input.keyboard.createCursorKeys();
+
+gameState.plats = this.physics.add.staticGroup();
+
+gameState.plats.create(185,400,'box')
+gameState.plats.create(320,260,'box').setBodySize(300,20).angle = 90
+gameState.plats.create(455,400,'box')
+gameState.plats.create(320,540,'box').setBodySize(300,20).angle = 90
+
+
+ this.physics.add.collider( gameState.player, gameState.ground );
+ this.physics.add.collider(gameState.player, gameState.plats);
+ 
+let txt = this.add.image ( 380, 40,'text box' )
+txt.setScale(0.55)
+
+let sentence = this.add.image ( 380, 15, 'sentence')
+sentence.setScale(0.46)
+
+let fight = this.add.image( 90, 640, 'fight')
+fight.setScale(0.31)
+ 
+ let act = this.add.image( 250, 640, 'act')
+ act.setScale(0.30)
+ 
+ let item = this.add.image( 413, 639, 'item')
+  item.setScale(0.73)
+ 
+ let mercy = this.add.image(580, 640, 'mercy')
+ mercy.setScale(0.74)
+ 
+ let gaster = this.add.image( 110, 130, 'Gaster Blaster')
+gaster.setScale(0.30)
+  gaster.angle = - 30
+  
+  let gaster2 = this.add.image( 515, 130, 'Gaster Blaster')
+gaster2.setScale(0.30)
+  gaster2.angle = 30
+ 
+ 
+   
+ gameState.bones = this.physics.add.group({
+ 		             key: 'Bone Spear',
+    quantity: 40,
+    maxSize: 40,
+    active: false,
+    visible: false,
+    enable: false,
+    collideWorldBounds: false,
+    
+                                            
+    
+ })
+ 
+   this.physics.moveToObject (gameState.bones, frisk, 2, 600);
+   
+
+   
+}
+
+
+function update(){
+
+if(gameState.cursors.right.isDown){
+      gameState.player.setVelocityX(100);
+
+  }
+  
+if(gameState.cursors.left.isDown){
+      gameState.player.setVelocityX(-100);
+
+  }
+  
+  if(gameState.cursors.up.isDown){
+      gameState.player.setVelocityY(-100);
+
+  }
+   if(gameState.cursors.down.isDown){
+      gameState.player.setVelocityY(100);
+
+  }
+  if (!gameState.cursors.right.isDown && !gameState.cursors.left.isDown && !gameState.cursors.up.isDown && !gameState.cursors.down.isDown){
+  gameState.player.anims.pause();
+  gameState.player.setVelocity(0)
+  }
+
+}
+  function makeBones(){
+    var bones = gameState.bones.get();
+    if(!bones){return}
+    bones.enableBody(true, phaser.Math.Between(0, 1500), Phaser.Math.Between(0, 900), true, true)
+  }
+
+
+
+</script>
+  </head>
+  <body>
+  </body>
+</html>
+
