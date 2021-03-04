@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <style>*{margin:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+    <script>
+    	const config = {
+    type: Phaser.AUTO,
+    width: 500,
+    height: 500,
+  backgroundColor: 0x00FFCC,
+  physics: {
+  default: 'arcade',
+  arcade: { debug: true }
+},
+    scene: {
+    create,
+    preload,
+    update
+    }
+}
+const game = new Phaser.Game(config);
+
+function preload() {
+    //12 x 12 spritesheet
+  this.load.spritesheet('character', 'https://i.imgur.com/vSbNXi1.png',{ frameWidth: 64, frameHeight: 64  });
+ 
+ this.load.image("niccage", "https://media.gq.com/photos/5582f8c409f0bee56440b484/master/pass/entertainment-2011-05-cage-match-nic-cage_300x430.jpg");
+ gameState.niccage = this.physics.add.sprite(200,400,'niccage').setScale(0.05).setBodySize(2500,2500);
+// this.physics.add.collider(gameState.character, gameState.niccage, function()
+  
+  
+    
+
+}
+
+
+const gameState = {
+    
+}
+
+function create() {
+                
+  
+  
+     gameState.player = this.physics.add.sprite(90,290,'character').setCollideWorldBounds(true).setInteractive().setBodySize(20,50);
+    
+ 
+     
+  this.anims.create({
+     key: 'left',
+     frames: this.anims.generateFrameNumbers('character', { start: 9, end: 17 }),
+     frameRate: 10,
+    });
+  
+  
+     this.anims.create({
+     key: 'right',
+     frames: this.anims.generateFrameNumbers( 'character', { start: 26, end: 35 }),
+     frameRate: 10,
+    });
+
+
+  this.anims.create({
+     key:'turn',
+  frames: [{key: 'character', frame: 4}],
+  frameRate: 10
+ });
+  this.anims.create({
+     key:'up',
+  frames: this.anims.generateFrameNumbers('character', { start: 0, end: 8 }),
+  frameRate: 8,
+ });
+ this.anims.create({
+     key:'down',
+  frames: this.anims.generateFrameNumbers('character', { start: 18, end: 25 }),
+  frameRate: 8
+ });
+ this.anims.create({
+     key:'test',
+  frames: this.anims.generateFrameNumbers('character', { start: 12, end: 16 }),
+  frameRate: 8
+ });
+ 
+ gameState.cursors = this.input.keyboard.createCursorKeys();
+     
+  
+gameState.cursors.SPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+  
+}
+
+
+function update(){
+      gameState.player.setVelocity(0);
+    //gameState.player.anims.play('turn');
+  
+  if(gameState.cursors.right.isDown){
+      gameState.player.setVelocityX(100);
+    gameState.player.flipX = false;
+    gameState.player.anims.play('right',true);
+  }  
+  
+  else if(gameState.cursors.left.isDown){
+      gameState.player.setVelocityX(-100);
+    gameState.player.flipX = true;
+    gameState.player.anims.play('right', true);
+  } 
+  if(gameState.cursors.up.isDown){
+      gameState.player.setVelocityY(-100);
+    gameState.player.anims.play('up', true);
+  } else if(gameState.cursors.down.isDown){
+      gameState.player.setVelocityY(100);
+    gameState.player.anims.play('down', true);
+  } 
+   
+ if(gameState.cursors.SPACE.isDown){
+         gameState.player.setVelocity(10);
+    gameState.player.anims.play('test', true);
+ }
+}
+
+
+</script>
+  </head>
+  <body>
+  </body>
+</html>
+
