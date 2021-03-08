@@ -1,28 +1,42 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title> </title>
-    <style>*{margin:0;}</style>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
-    <script>
-    	var fruit = [
-"apple",
-"apricots",
-"avocado",
-"banana",
-"blackberry",
-"blueberry",
-"cantaloupe",
-"cherries",
-"date",
-"durian",
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <title>Hangman</title>
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center">Hangman</h1>
+  <div class="float-right">Wrong Guesses: <span id='mistakes'>0</span> of <span id='maxWrong'></span></div>
+  <div class="text-center">
+    <img id='hangmanPic' src="./images/0.jpg" alt="">
+    <p>Guess the fruit:</p>
+    <p id="wordSpotlight">The word to be guessed goes here</p>
+    <div id="keyboard"></div>
+    <button class="btn btn-info" onClick="reset()">Reset</button>
+  </div> 
+</div>
+
+<script>var fruit = [
+	"apple",
+	"apricots",
+	"avocado",
+	"banana",
+	"blackberry",
+	"blueberry",
+	"cantaloupe",
+	"cherries",
+	"date",
+	"durian",
   "drangonfruit",
-"elderberry",
-"feijoa",
-"grapefruit",
-"grapes",
+	"elderberry",
+	"feijoa",
+	"grapefruit",
+	"grapes",
   "honeydew",
   "ilama",
   "jackfruit",
@@ -50,14 +64,17 @@
   "youngberry",
   "zhe",
 ]
+
 let answer = '';
 let maxWrong = 7;
 let mistakes = 0;
 let guessed = [];
 let wordStasus = null;
+
 function randomWord() {
   answer = fruit[Math.floor(Math.random() * fruit.length)];
 }
+
 function generateButtons() {
   let buttonsHTML = 'abcdefghijklmnopqrstuvwxyz'.split('').map(letter =>
     `
@@ -69,11 +86,14 @@ function generateButtons() {
         ` + letter + `
       </button>
     `).join('');
+
   document.getElementById('keyboard').innerHTML = buttonsHTML;
 }
+
 function handleGuess(chosenLetter) {
   guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
   document.getElementById(chosenLetter).setAttribute('disabled', true);
+
   if (answer.indexOf(chosenLetter) >= 0) {
     guessedWord();
     checkIfGameWon();
@@ -84,43 +104,50 @@ function handleGuess(chosenLetter) {
     updateHangmanPicture();
   }
 }
+
 function updateHangmanPicture() {
   document.getElementById('hangmanPic').src = './images/' + mistakes + '.jpg';
 }
+
 function checkIfGameWon() {
   if (wordStatus === answer) {
     document.getElementById('keyboard').innerHTML = 'You Won!!!';
   }
 }
+
 function checkIfGameLost() {
   if (mistakes === maxWrong) {
     document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + answer;
     document.getElementById('keyboard').innerHTML = 'You Lost!!!';
   }
 }
+
 function guessedWord() {
   wordStatus = answer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+
   document.getElementById('wordSpotlight').innerHTML = wordStatus;
 }
+
 function updateMistakes() {
   document.getElementById('mistakes').innerHTML = mistakes;
 }
+
 function reset() {
   mistakes = 0;
   guessed = [];
   document.getElementById('hangmanPic').src = './images/0.jpg';
+
   randomWord();
   guessedWord();
   updateMistakes();
   generateButtons();
 }
+
 document.getElementById('maxWrong').innerHTML = maxWrong;
+
 randomWord();
 generateButtons();
 guessedWord();
 </script>
-  </head>
-  <body>
-  </body>
+</body>
 </html>
-
