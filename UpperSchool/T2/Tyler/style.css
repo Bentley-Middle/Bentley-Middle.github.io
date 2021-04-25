@@ -1,0 +1,96 @@
+h1{
+  text-align: center
+}
+
+p2{
+  text-decoration: underline;
+}
+
+#Nav_Bar{
+  height: 20px;
+  padding: 5px 5x;
+  background-color: darkgray;
+  line-height: 1;
+  text-align: center;
+}
+
+#intro{
+  height: 200px;
+  margin: px;
+  border: px solid;
+  padding: 15px 15px;
+  background-color: #bccad6;
+  line-height: 1;
+}
+
+#psychology{
+  height: 230px;
+  margin: px;
+  border: px solid;
+  padding: 15px 15px;
+  background-color: #bccad6;
+  line-height: 1;
+}
+
+#Illuminati{
+  height: 350px;
+  margin: px;
+  border: px solid;
+  padding: 15px 15px;
+  background-color: #8d9db6;
+  line-height: 1;
+}
+
+#Illuminati_2{
+  height: 295px;
+  margin: px;
+  border: px solid;
+  padding: 15px 15px;
+  background-color: #8d9db6;
+  line-height: 1;
+}
+
+#Flat_Earth{
+  height: 350px;
+  margin: px;
+  border: px solid;
+  padding: 15px 15px;
+  background-color: #667292;
+  line-height: 1;
+}
+
+#Flat_Earth_2{
+  height: 250px;
+  margin: px;
+  border: px solid;
+  padding: 15px 15px;
+  background-color: #667292;
+  line-height: 1;
+}
+
+#QAnon{
+  height: 350px;
+  margin: px;
+  border: px solid;
+  padding: 15px 15px;
+  background-color: #f1e3dd;
+  line-height: 1;
+}
+
+#QAnon_2{
+  height: 260px;
+  margin: px;
+  border: px solid;
+  padding: 15px 15px;
+  background-color: #f1e3dd;
+  line-height: 1;
+}
+
+#conclusion{
+  height: 195px;
+  margin: px;
+  border: px solid;
+  padding: 15px 15px;
+  background-color: #bccad6;
+  line-height: 1;
+}
