@@ -1,0 +1,108 @@
+
+.background{
+  background-color: #006CDF;
+}
+
+.navigation {
+  text-align:center;
+}
+.divNav {
+  position: sticky;
+  top: 10px;
+  border: 3px solid #279fff;
+  border-radius: 30px;
+  background-color:#7eddfe;
+  z-index: 1;
+  margin: auto;
+  width: 400px;
+}
+
+
+.fishDesc{
+  font-size: 20px;
+  color:darksalmon;
+}
+h1{
+  color:burlywood;
+  font-family: fantasy;
+}
+h3{
+  color:coral;
+  font-family:sans-serif;
+  letter-spacing: 1px;
+  font-size: 20px;
+}
+.fishIntro{
+  font-size: 17px;
+  border:30px solid transparent;
+  color:darksalmon;
+}
+.fishImg{
+  float: right;
+  clear: right;
+  width: 200px;
+  border:9px solid transparent;
+  display: block;
+}
+.fishMainImg{
+  width: 30%;
+  display: block;
+  margin: auto;
+  border: 2px solid #1B89FF;
+  border-radius: 50px;
+}
+.Left{
+  position: relative;
+  left: -20px;
+}
+.ImgSource{
+  font-size: 10px;
+}
+
+
+.banner{
+  width:100%; 
+  display: block;
+  position: relative;
+  top: -68px;
+}
+.ocean1{
+  height: 40px;
+  margin: px;
+  background-color: #007BF9;
+  line-height: %;
+  position: relative;
+  top:-68px;
+}
+.ocean2{
+    height: 35px;
+    margin: px;
+    background-color: #0076F1;
+    line-height: %;
+    position: relative;
+    top:-68px;
+}
+.ocean3{
+  height: 30px;
+  margin: px;
+  background-color: #0072EA;
+  line-height: %;
+  position: relative;
+  top:-68px;
+}
+.ocean4{
+  height: 25px;
+  margin: px;
+  background-color: #006EE3;
+  line-height: %;
+  position: relative;
+  top:-68px;
+}
+.ocean5{
+  height: 20px;
+  margin: px;
+  background-color: #006CDF;
+  line-height: %;
+  position: relative;
+  top:-68px;
+}
