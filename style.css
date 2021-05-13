@@ -1,0 +1,43 @@
+body{
+  background-color: black
+}
+
+.bentleylogo{
+  color: blue;
+  font-family: cursive;
+  font-size: 30px;
+  text-shadow: 2px 2px yellow;
+  text-align: center
+
+}
+ul{
+  list-style-position: inside;
+}
+.websites{
+  color:yellow;
+  font-family: cursive;
+  text-shadow: 2px 2px blue;
+  text-align: left;
+
+}
+#phoenix{
+  width: 90px;
+  transform: rotateY(180deg);
+
+
+}
+#phoenix2{
+  width: 90px;
+  margin-right: auto;
+}
+#logo{
+  width: 170px;
+  top: 50%;
+  margin-left: 50%;
+ 
+  
+}
+
+#sites{
+  
+}
