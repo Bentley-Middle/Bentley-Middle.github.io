@@ -1,0 +1,47 @@
+body {
+  background: black;
+}
+.cattitle{
+  color: mediumpurple;
+  font-family: "Comic Sans MS";
+  font-size: 20px;
+  text-shadow: 2px 2px lightblue;
+  text-align: center;
+}
+a { 
+  color: turquoise;
+  text-decoration:none;
+}
+p{
+  text-shadow: 1.5px 1.5px pink;
+  font-family: "Comic Sans MS";
+}
+.chunkycat {
+  float: left;
+  margin-right: 20px;
+  border-radius: 20px;
+  width: 560px;
+  height: 440px;
+}
+
+.sasucat {
+  float: left;
+  margin-right: 20px;
+  border-radius: 20px;
+  width: 569px;
+  height: 440px;
+}
+.couchcat {
+  margin-right: 20px;
+  border-radius: 20px;
+  width: 569px;
+  height: 440px;
+  float: right;
+}
+.huhcat {
+  float: right;
+  margin-right: 20px;
+  border-radius: 20px;
+  width: 569px;
+  height: 440px;
+}
