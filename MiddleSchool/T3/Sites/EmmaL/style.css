@@ -1,0 +1,70 @@
+img {
+  
+width: 230px;
+float: left;
+}
+
+.cake {
+  width: 230px;
+  float: right;
+}
+
+li {
+  
+  font-size: 30px;
+  font-family: garamond;
+  color: dimgray;
+}
+
+h3 {
+  
+font-size: 50px;
+font-family: garamond;
+color: skyblue;
+text-align: center;
+  
+}
+
+h2 {
+  
+font-size: 25px;
+  font-family: garamond;
+  color: dimgray;
+  text-align: center;
+}
+
+h4 {
+  font-size: 30px;
+  font-family: garamond;
+  color: dimgray;
+  text-align: center;
+}
+
+h6 {
+  font-size: 25px;
+  font-family: garamond;
+  color: #ffaad1;
+}
+
+
+h1 {
+  font-family: garamond;
+  font-size: 65px;
+    color: skyblue;
+  text-align: center;
+}
+
+a {
+  color: #ffaad1;
+  text-align: left;
+}
+
+p {
+  font-size: 20px;
+  font-size: garamond;
+}
+
+h5 {
+  font-size: 25px;
+  text-align: left;
+}
