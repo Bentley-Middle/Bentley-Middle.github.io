@@ -1,0 +1,28 @@
+h1{
+  color:black;
+  text-decoration-line:underline;
+  font-family: fantasy;
+}
+
+li{
+  font-family:fantasy;
+}
+h2{
+  font-family: fantasy;
+  color:black;
+
+}
+
+body{
+  background-color:paleturquoise;
+  
+}
+
+img{
+  width:300px;
+  float:left;
+  border-color: antiquewhite;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 10px;
+}
