@@ -1,0 +1,44 @@
+body {
+  background: black;
+}
+.Nintitle {
+  color: lightcoral;
+  font-family: "Comic Sans MS";
+  font-size: 20px;
+  text-shadow: 2px 2px black;
+  text-align: center;
+}
+.chomp {
+  text-align: center;
+  margin-right: 20px;
+  border-radius: 20px;
+  height: 406px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+ }
+.shyguy {
+  margin-right: 20px;
+  border-radius: 20px;
+  height: 406px;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pokemon {
+  margin-right: 20px;
+  border-radius: 20px;
+  height: 406px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+a { 
+  color: turquoise;
+  text-decoration:none;
+}
+p{
+  text-shadow: 1.5px 1.5px pink;
+  font-family: "Comic Sans MS";
+}
