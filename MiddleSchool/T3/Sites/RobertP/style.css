@@ -1,0 +1,36 @@
+
+body {
+  background-color: black;
+}
+.penguinmain {
+background-color:black;
+color:white;
+font-family: cursive;
+}
+.tarantulamain {
+
+color:black;
+font-family: inherit;
+}
+.penguinheading {
+color:darkorange;
+font-family: sans-serif;
+text-align: center;
+border-style:dashed;
+border-top-color:#976541;
+border-bottom-color: #976541;
+
+s
+}
+.tarantulaheading {
+  
+}
+.Index1 {
+  color:#B37958;
+  font-style: cursive;
+  
+}
+
+.Abouttheauthor{
+  
+}
