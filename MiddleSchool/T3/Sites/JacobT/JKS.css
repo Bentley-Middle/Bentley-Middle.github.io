@@ -1,0 +1,42 @@
+body {
+  background: black;
+}
+.title {
+  color: lightgoldenrodyellow;
+  font-family: "Comic Sans MS";
+  font-size: 30px;
+  text-shadow: 2px 2px pink;
+  text-align: center;
+}
+.fridge {
+  margin-right: 20px;
+  border-radius: 20px;
+  width: 146px;
+  height: 146px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+  .punchline {
+    color: lightgoldenrodyellow;
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    text-shadow: 2px 2px pink;
+    text-align: center;
+  }
+
+a { 
+  color: turquoise;
+  text-decoration:none;
+}
+p{
+  text-shadow: 1.5px 1.5px pink;
+  font-family: "Comic Sans MS";
+}
+.isuck{
+  color: lightgoldenrodyellow;
+  font-family: "Comic Sans MS";
+  font-size: 20px;
+  text-shadow: 1.9px 1.9px pink;
+  text-align: center;
+}
