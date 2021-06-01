@@ -1,0 +1,34 @@
+
+.penguinheading {
+  color:darkorange;
+  font-family: sans-serif;
+  text-align: center;
+  border-style:dashed;
+  border-left-color: white;
+  border-right-color: white;
+  font-size:45px;
+}
+.penguinmain {
+  color:white;
+  font-family: cursive;
+  font-size: 20px;
+}
+body {
+  background-color:black
+}
+.penguin1picture {
+  border-style:solid;
+  border-color:#C49D38;
+  border-width:3px;
+  border-radius:100px;
+  float:left;
+  margin: 5px;
+}
+.penguin2picture {
+  border-color:#C49D38;
+  border-width:3px;
+  float:right;
+  border-style: dashed;
+  border-radius:100px;
+  margin=5px;
+}
