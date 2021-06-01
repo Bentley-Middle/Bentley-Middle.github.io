@@ -1,0 +1,71 @@
+body {
+  background: white;
+}
+p {
+  color: black;
+}
+h1 {
+  font-weight: bold;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+.penguins{
+  background-color:black;
+  float:left;
+  width:50%;
+  height: 950px;
+}
+.penguinmain {
+    color:white;
+    font-family: cursive;
+    font-size: 20px;
+    text-align:
+}
+.penguinheading {
+  color:darkorange;
+  font-family: sans-serif;
+  text-align: center;
+  border-style:dashed;
+  border-left-color: white;
+  border-right-color: white;
+  font-size:45px;
+  
+}
+.tarantulas {
+  background-color:tan;
+  float:right;
+  width:50%;
+  margin-right: 0px;
+  height:950px;
+}
+.tarantulahead{
+  font-family: inherit;
+  text-align: center;
+  border-style: dotted;
+  font-size: 45px;
+  border-color: darkcyan;
+}
+.tarantulamain {
+    color:black;
+    font-family: in;
+    font-size: 20px;
+  }
+
+.penguin3picture {
+  float:left;
+  border-radius:75px;
+  border-style:dashed;
+  border-color:#4E6D8F;
+  border-width:5px;
+  margin:10px;
+  
+}
+.tarantula3picture {
+  float:right;
+  border-radius:25px ;
+  border-style:groove;
+  border-color:#0E2C5C;
+  border-width:10px
+}
