@@ -1,0 +1,41 @@
+body {
+  background-color:tan;
+}
+p {
+  color: black;
+}
+h1 {
+  font-weight: bold;
+
+  
+}
+.tarantulamain {
+  color:black;
+  font-family: inherit;
+  font-size: 20px;
+}
+.tarantulahead{
+  font-family: inherit;
+  text-align: center;
+  border-style: outset;
+  border-width: 20px;
+  font-size:45px;
+  
+}
+.tarantula1picture{
+  float:left;
+  border-radius:50px;
+  border-style:solid;
+  border-color:#453110;
+  border-width:5px;
+  margin:15px;
+}
+.tarantula2picture{
+  float:right;
+  border-radius:50px;
+  border-style:solid;
+  border-color:#8C949C;
+  border-width:10px;
+  margin:10px;
+}
+
