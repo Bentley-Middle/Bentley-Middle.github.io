@@ -1,0 +1,22 @@
+body{
+  background-color: black
+}
+
+.Title{
+  color: pink;
+  font-family: "Comic Sans MS";
+  font-size: 30px;
+  text-shadow: 2px 2px turquoise;
+  text-align: center
+  
+}
+.websites{
+  color: pink;
+  font-family: "Comic Sans MS";
+  text-shadow: 2px 2px pink;
+  text-align: center
+}
+a { 
+  color: turquoise;
+  text-decoration: none
+}
