@@ -1,0 +1,92 @@
+body {
+  background-color: #77141B;
+}
+
+.topnav {
+  background-color: #540E13;
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #961923;
+  color: white;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-title {
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-style: italic;
+  font-size: 35px;
+  font-family: OCR A Std, monospace
+}
+
+.topnav-top {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  line-height: 1px;
+}
+
+.topnav-image {
+  margin-top: 10px;
+}
+
+.Events-Description {
+  text-align: center;
+  display: block;
+}
+
+.event-banner {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Events-Title {
+  text-align: center;
+  display: block;
+}
+
+.Events-Date {
+  line-height: 5px;
+}
+
+h3 {
+  font-weight: normal;
+}
+
+.Events-Location {
+  margin-top: 5px;
+}
+
+ul {
+  font-size: 17px;
+}
+
+a.twitch {
+  color: indianred;
+}
+
+.Events-lm {
+  text-decoration: none;
+  background-color: #540E13;
+  color: white;
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 17px;
+}
