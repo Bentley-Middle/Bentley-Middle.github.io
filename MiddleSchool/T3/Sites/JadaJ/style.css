@@ -1,0 +1,23 @@
+body { 
+  background-color:lightskyblue
+}
+h1{
+  color:white;
+  text-align: center; 
+  font-family:fantasy
+}
+h2 {
+  color: azure;
+  font-family: fantasy
+}
+h3 {
+  color:black;
+  font-family: fantasy
+}
+.name {
+  text-align: center;
+  color:white; 
+}
+.reviews {
+  text-align: center
+}
